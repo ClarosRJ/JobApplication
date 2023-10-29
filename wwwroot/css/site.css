@@ -1,0 +1,119 @@
+
+
+.card{
+    margin-bottom : 150px;
+}
+a.navbar-brand{
+    white-space:normal;
+    text-align:center;
+    word-break: break-all;
+}
+/*proveer contraste al fondo*/
+a{
+    color: #0366d6;
+}
+.btn-primary{
+    color : #fff;
+    background-color: #1b6ec2;
+    border-color : #1861ac;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+/*start Fotter Styles
+    -------------------------*/
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+.border-top{
+    border-top: 1px solid #e5e5e5;
+}
+.border-tbottom{
+    border-bottom: 1px solid #e5e5e5;
+}
+.border-shadow{
+    box-shadow : 0 .25rem .75rem rgba(0,0,0, .05);
+}
+.button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/*end Fotter Styles
+    -------------------------*/
+/**/
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+
+body {
+  margin-bottom: 35px;
+}
+
+.footer{
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 50px;
+}
+/*start Table tr td*/
+.margin-top {
+    margin-top: 50px;
+}
+.CodesTable table {
+    width: 100%;
+}
+
+.CodesTable thead {
+    border:none;
+    width: calc(100% - 1em)
+}
+
+.CodesTable tbody {
+    display: block;
+    height: 140px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.CodesTable thead, .CodesTable tbody tr {
+    display: table;
+    width: 97%;
+    table-layout: fixed;
+    text-align:center;
+}
+
+.CodesTable thead, .CodesTable tbody, .CodesTable td {
+    border: none !important;
+}
+
+.YearsWorked {
+    background-image: none;
+}
+
+label {
+    padding-top: 10px;
+}
+
+input {
+    padding: 5px;
+    padding-bottom: 10px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+

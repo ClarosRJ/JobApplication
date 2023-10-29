@@ -1,0 +1,183 @@
+﻿@*Me que en minuto 30:58 continuar*@
+@model JobApplication.Models.Applicant
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<hr />
+<div class="col-12 mx-auto pt-0 p-0">
+    <div class="card">
+        <div class="card-header bg-success text-uppercase text-while" style="height:45px">
+            <h4>Vista del Postulante</h4>
+        </div>
+        <form id="ApplicantForm" enctype="multipart/form-data" asp-action="Create" style="margin-top:15px">
+            <div class="container-fluid btn-group">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control-plaintext" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Gender" class="control-label"></label>
+                                <input asp-for="Gender" class="form-control-plaintext" readonly />
+                            </div>
+                        </div>
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Age" class="control-label"></label>
+                                <input asp-for="Age" class="form-control-plaintext" readonly />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Qualification" class="control-label"></label>
+                                <input asp-for="Qualification" class="form-control-plaintext" readonly />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="TotalExperience" class="control-label"></label>
+                                <input asp-for="TotalExperience" class="form-control-plaintext" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex justify-content-center align-middle" style="height: 100%;">
+                        <div class="form-group">
+                            <img src="~/images/@Model.PhotoUrl" alt="Logo Image"
+                                 style="border:1px;margin-top:20px;width:200px;height:200px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container col-12 btn-group margin-top">
+
+                <div class="container col-6 pl-0 ml-0">
+
+                    <div class="col-md-12 p-0 m-0 bg-light">
+                        <table id="ExpTable" class="table table-sm CodesTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Nombre Empresa
+                                    </th>
+                                    <th>
+                                        Designación
+                                    </th>
+                                    <th>
+                                        Años Experiencia
+                                    </th>
+                                    <th style="width:75px;">
+                                       
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Experiences.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input asp-for="@Model.Experiences[i].CompanyName" class="form-control-plaintext" readonly>
+                                        </td>
+                                        <td>
+                                            <input asp-for="@Model.Experiences[i].Designation" class="form-control-plaintext" readonly>
+                                        </td>
+                                        <td>
+                                            <input asp-for="@Model.Experiences[i].YearsWorked" class="form-control-plaintext" readonly />
+                                        </td>
+                                        <td style="width:60px;">
+                                          
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="container col-1">
+                </div>
+
+                <div class="container col-5">
+
+                    <div class="col-md-12 p-0 m-0 bg-light">
+                        <table id="SoftwareExpTable" class="table table-sm CodesTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Software
+                                    </th>
+                                    <th>
+                                        Clasificaciones
+                                    </th>
+                                    <th style="width:60px;">
+                                       
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.SoftwareExperiences.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                           @* <select asp-for="@Model.SoftwareExperiences[i].SoftwareId" class="form-control" asp-items="ViewBag.Softwares" disabled></select>
+*@
+                                            <select asp-for="@Model.SoftwareExperiences[i].SoftwareId" class="form-control-plaintext" readonly
+                                                    asp-items="ViewBag.Softwares"
+                                                    onchange="JsOnProductChange(this)"></select>
+                                        </td>
+                                        <td>
+                                            <input type="hidden" asp-for="@Model.SoftwareExperiences[i].IsHidden">
+                                            <select asp-for="@Model.SoftwareExperiences[i].Rating" class="form-control-plaintext" readonly
+                                                    asp-items="ViewBag.Rating"></select>
+                                        </td>
+                                        <td style="width:60px;">
+                                           
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <input type="hidden" id="hdnLastIndex" value="0"/>
+            <div class="col-12 btn-group">
+                <div class="col-6 form-group text-right p-2" >
+                    <a asp-action="Index" class="btn btn-secondary">&nbsp; Volver &nbsp;</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+@*<style>
+    label {
+        padding: 5px;
+       
+    }
+    input {
+        padding: 5px;
+        padding-bottom: 10px;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+</style>*@
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

@@ -1,0 +1,12 @@
+﻿Este es un sistema de aplicacion a vacantes laborales donde podras registrar sus datos personales como foto de perfil.
+tambien podra registrar datos de experienccia laborar en en sus distintas empresas, cargos, años de experiencia.
+CRUD MAESTRO DETALLE
+hecho en ASP.NET Core Web App con la arquitectura de (MVC)
+
+1.- Se creo las distintas clases del modelo 
+2.- Se creo Data y la clase de JobApplicationDbContext para realizar las migraciones con dbcontext 
+3.- Se configuro en appsettings la conexion a la base de datos  
+4.- Se creo el controlador del modelo Applicant donde se creo los distintos metodos y funciones
+5.- se crearon las vistas de Index por defecto del sistema mandandole el modelo y la conexion a la base de datos
+
+

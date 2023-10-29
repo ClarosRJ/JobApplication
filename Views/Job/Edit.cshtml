@@ -1,0 +1,203 @@
+﻿@model JobApplication.Models.Applicant
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<div class="col-12 mx-auto pt-0 p-0">
+    <div class="card">
+        <div class="card-header bg-success text-uppercase text-while" style="height:45px">
+            <h4>Editar Postulación</h4>
+        </div>
+        <form id="ApplicantForm" enctype="multipart/form-data" asp-action="Edit" style="margin-top:15px">
+            <input type="hidden" asp-for="Id"/>
+            <input type="hidden" asp-for="PhotoUrl"/>
+
+            <div class="container-fluid btn-group">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 btn-group">
+                            <div class="form-group col-8 p-0">
+                                <label asp-for="profilephoto" class="control-label"></label>
+                                <div class="custom-file">
+                                    <input asp-for="profilephoto" class="custom-file-input" id="customFile"
+                                           onchange="document.getElementById('PreviewPhoto').src =  window.URL.createObjectURL(this.files[0])" />
+                                </div>
+                                <span asp-validation-for="profilephoto" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Gender" class="control-label"></label>
+                                <select asp-for="Gender" class="form-control" asp-items="ViewBag.Gender"></select>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Age" class="control-label"></label>
+                                <input asp-for="Age" class="form-control" />
+                                <span asp-validation-for="Age" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Qualification" class="control-label"></label>
+                                <input asp-for="Qualification" class="form-control" />
+                                <span asp-validation-for="Qualification" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="TotalExperience" class="control-label"></label>
+                                <input asp-for="TotalExperience" class="form-control-plaintext" readonly />
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex justify-content-center align-middle" style="height: 100%;">
+                        <div class="form-group">
+                            <img id="PreviewPhoto" src="~/images/@Model.PhotoUrl" alt="Logo Image"
+                                 width="200" height="200" style="border: 1px; margin-top: 20px;">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container col-12 btn-group margin-top">
+
+                <div class="container col-6 pl-0 ml-0">
+
+                    <div class="col-md-12 p-0 m-0 bg-light">
+                        <table id="ExpTable" class="table table-sm CodesTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Nombre Empresa
+                                    </th>
+                                    <th>
+                                        Designación
+                                    </th>
+                                    <th>
+                                        Años Experiencia
+                                    </th>
+                                    <th style="width:75px;">
+                                        <button id="btnaddExperience" type="button" class="btn btn-sm btn-secondary visible"
+                                                onclick="AddItem(this)">
+                                            <!-- Agrega el estilo margin-left -->
+                                            Agregar
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Experiences.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input asp-for="@Model.Experiences[i].CompanyName" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input asp-for="@Model.Experiences[i].Designation" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input type="hidden" asp-for="@Model.Experiences[i].IsDeleted" />
+                                            <input asp-for="@Model.Experiences[i].YearsWorked" class="form-control YearsWorked">
+                                            <span asp-validation-for="@Model.Experiences[i].YearsWorked" class="text-danger"></span>
+                                        </td>
+                                        <td style="width:60px;">
+                                            <button id="btnremove-@i" type="button" class="btn btn-sm btn-danger visible"
+                                                    onclick="DeleteItem(this)">
+                                                Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="container col-1">
+                </div>
+
+                <div class="container col-5">
+
+                    <div class="col-md-12 p-0 m-0 bg-light">
+                        <table id="SoftwareExpTable" class="table table-sm CodesTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Software
+                                    </th>
+                                    <th>
+                                        Clasificaciones
+                                    </th>
+                                    <th style="width:60px;">
+                                        <button id="btnaddSoftware" type="button" class="btn btn-sm btn-secondary visible"
+                                                onclick="AddItem(this)">
+                                            Agregar
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.SoftwareExperiences.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <select asp-for="@Model.SoftwareExperiences[i].SoftwareId" class="form-control"
+                                                    asp-items="ViewBag.Softwares"
+                                                    onchange="JsOnProductChange(this)"></select>
+                                        </td>
+                                        <td>
+                                            <input type="hidden" asp-for="@Model.SoftwareExperiences[i].IsHidden">
+                                            <select asp-for="@Model.SoftwareExperiences[i].Rating" class="form-control"
+                                                    asp-items="ViewBag.Rating"></select>
+                                        </td>
+                                        <td style="width:60px;">
+                                            <button id="btnremoveSoft-@i" type="button" class="btn btn-sm btn-danger visible"
+                                                    onclick="DeleteItem(this)">
+                                                Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <input type="hidden" id="hdnLastIndex" value="0" />
+
+            <div class="col-12 btn-group">
+                <div class="col-6 form-group text-right p-2">
+                    <a asp-action="Index" class="btn btn-secondary">&nbsp; Volver &nbsp;</a>
+                </div>
+                <div class="col-6 form-group text-left p-2">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+ }
